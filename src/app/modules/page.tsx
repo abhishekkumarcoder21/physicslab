@@ -120,7 +120,7 @@ export default function ModulesPage() {
           </div>
 
           {/* Overall progress pill */}
-          <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-surface-card border border-border shadow-sm">
+          <div className="flex items-center gap-3 px-4 py-2.5 rounded-2xl bg-surface-card border border-border shadow-sm backdrop-blur-xl">
             <div className="w-32 h-2 rounded-full bg-surface-hover overflow-hidden">
               <div className="h-full rounded-full bg-gradient-to-r from-primary to-accent animate-progress-fill" style={{ width: "12%" }} />
             </div>
@@ -142,7 +142,7 @@ export default function ModulesPage() {
             <div key={mod.title} className="animate-fade-in" style={{ animationDelay: `${i * 80}ms` }}>
               <Link
                 href={mod.href}
-                className={`group relative flex flex-col lg:flex-row gap-6 rounded-3xl border p-6 lg:p-8 transition-all duration-300 ${
+                className={`group relative flex flex-col lg:flex-row gap-6 rounded-3xl border p-6 lg:p-8 transition-all duration-300 backdrop-blur-xl ${
                   isActive
                     ? `${mod.bgColor} ${mod.borderColor} shadow-lg hover:shadow-xl`
                     : `bg-surface-card border-border hover:bg-surface-hover shadow-sm hover:shadow-md`

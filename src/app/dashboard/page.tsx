@@ -94,7 +94,7 @@ export default function DashboardPage() {
     <div className="max-w-6xl mx-auto space-y-10 animate-fade-in">
 
       {/* ━━━ 1. CONTINUE LEARNING HERO ━━━ */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-surface-card to-accent/10 border border-primary/20 p-8 animate-glow">
+      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/10 via-surface-card to-accent/10 border border-primary/20 p-8 animate-glow backdrop-blur-xl">
         {/* decorative blobs */}
         <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-primary/5 blur-3xl" />
         <div className="absolute -bottom-12 -left-12 w-36 h-36 rounded-full bg-accent/5 blur-3xl" />
@@ -123,7 +123,7 @@ export default function DashboardPage() {
 
       {/* ━━━ 2. CURRENT CHAPTER ━━━ */}
       <section className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-1 flex flex-col items-center justify-center rounded-2xl bg-surface-card border border-border p-8 shadow-sm animate-scale-in">
+        <div className="lg:col-span-1 flex flex-col items-center justify-center rounded-2xl bg-surface-card border border-border p-8 shadow-sm animate-scale-in backdrop-blur-xl">
           <div className="relative mb-4">
             <CircularProgress value={12} size={88} stroke={6} />
             <span className="absolute inset-0 flex items-center justify-center text-lg font-bold text-primary rotate-0">
@@ -147,7 +147,7 @@ export default function DashboardPage() {
             { label: "Simulations Explored", value: "5", sub: "interactive labs", icon: "🔬", gradient: "from-emerald-500/10 to-teal-500/10" },
             { label: "Study Streak", value: "5 days", sub: "keep going!", icon: "🔥", gradient: "from-orange-500/10 to-amber-500/10" },
           ].map((stat, i) => (
-            <div key={stat.label} className={`flex flex-col justify-between rounded-2xl bg-gradient-to-br ${stat.gradient} border border-border p-5 shadow-sm animate-fade-in delay-${(i + 1) * 100}`}>
+            <div key={stat.label} className={`flex flex-col justify-between rounded-2xl bg-gradient-to-br ${stat.gradient} border border-border p-5 shadow-sm animate-fade-in backdrop-blur-xl delay-${(i + 1) * 100}`}>
               <span className="text-3xl mb-3">{stat.icon}</span>
               <div>
                 <p className="text-2xl font-extrabold text-text">{stat.value}</p>
@@ -178,7 +178,7 @@ export default function DashboardPage() {
               const isActive = ch.status === "in-progress";
               const isLocked = ch.status === "locked";
               return (
-                <div key={ch.title} className={`relative flex items-center gap-5 rounded-2xl border p-5 transition-all duration-300 ${
+                <div key={ch.title} className={`relative flex items-center gap-5 rounded-2xl border p-5 transition-all duration-300 backdrop-blur-xl ${
                   isActive
                     ? "bg-primary/5 border-primary/30 shadow-md shadow-primary/5"
                     : "bg-surface-card border-border hover:bg-surface-hover"
@@ -241,9 +241,9 @@ export default function DashboardPage() {
             const moduleStatus = mod.concepts.every(c => c.status === "done") ? "done"
               : mod.concepts.some(c => c.status === "current") ? "current" : "locked";
             return (
-              <div key={mod.module} className={`rounded-2xl border p-5 transition-all ${
-                moduleStatus === "current" ? "bg-amber-500/3 border-amber-500/20" :
-                moduleStatus === "done" ? "bg-emerald-500/3 border-emerald-500/20" :
+              <div key={mod.module} className={`rounded-2xl border p-5 transition-all backdrop-blur-xl ${
+                moduleStatus === "current" ? "bg-amber-500/5 border-amber-500/20" :
+                moduleStatus === "done" ? "bg-emerald-500/5 border-emerald-500/20" :
                 "bg-surface-card border-border opacity-60"
               } animate-fade-in`} style={{ animationDelay: `${mi * 100}ms` }}>
                 <div className="flex items-center gap-2 mb-3">
@@ -254,8 +254,8 @@ export default function DashboardPage() {
                 <div className="flex flex-wrap gap-2">
                   {mod.concepts.map((c) => (
                     <div key={c.name} className={`flex items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-medium border transition-all ${
-                      c.status === "done" ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600" :
-                      c.status === "current" ? "bg-amber-500/10 border-amber-500/20 text-amber-600" :
+                      c.status === "done" ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400" :
+                      c.status === "current" ? "bg-amber-500/10 border-amber-500/20 text-amber-400" :
                       "bg-surface-hover border-border text-text-muted"
                     }`}>
                       <StatusPill status={c.status} />
@@ -287,7 +287,7 @@ export default function DashboardPage() {
             <Link
               key={exp.name}
               href="/kinematics"
-              className="group relative overflow-hidden rounded-2xl bg-surface-card border border-border p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-fade-in"
+              className="group relative overflow-hidden rounded-2xl bg-surface-card border border-border p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 animate-fade-in backdrop-blur-xl"
               style={{ animationDelay: `${i * 120}ms` }}
             >
               {/* gradient top accent */}

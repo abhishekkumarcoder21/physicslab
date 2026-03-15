@@ -1,14 +1,28 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { getCurrentUser } from "@/lib/supabase/auth";
+
 interface TopBarProps {
   /** Global progress percentage (0–100) */
   progress?: number;
 }
 
 export default function TopBar({ progress = 0 }: TopBarProps) {
+  const [initial, setInitial] = useState("U");
+
+  useEffect(() => {
+    getCurrentUser().then((user) => {
+      if (user) {
+        const name = user.user_metadata?.full_name || user.email || "";
+        setInitial(name.charAt(0).toUpperCase() || "U");
+      }
+    });
+  }, []);
+
   return (
-    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-white/80 backdrop-blur-md px-6 lg:pl-72">
-      {/* Left: page context (placeholder) */}
+    <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-border bg-surface-dark/60 backdrop-blur-xl px-6 lg:pl-72">
+      {/* Left: page context */}
       <div className="flex items-center gap-3">
         <h2 className="text-lg font-semibold text-text">Learn Physics</h2>
       </div>
@@ -32,7 +46,7 @@ export default function TopBar({ progress = 0 }: TopBarProps) {
       {/* Right: user avatar */}
       <div className="flex items-center gap-3">
         <div className="flex items-center justify-center w-9 h-9 rounded-full bg-gradient-to-br from-primary to-accent text-white text-sm font-bold shadow-md">
-          U
+          {initial}
         </div>
       </div>
     </header>
