@@ -23,7 +23,7 @@ interface StarfieldBackgroundProps {
 export default function StarfieldBackground({
   count = 1200,
   speed = 0.3,
-  color = "#818cf8",
+  color = "#ffffff",
   height = "100vh",
   children,
 }: StarfieldBackgroundProps) {
@@ -68,15 +68,32 @@ export default function StarfieldBackground({
     geom.setAttribute("position", new THREE.BufferAttribute(positions, 3));
     geom.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
 
-    const mat = new THREE.PointsMaterial({
-      color: new THREE.Color(color),
-      size: 1.2,
-      sizeAttenuation: true,
-      transparent: true,
-      opacity: 0.8,
-      blending: THREE.AdditiveBlending,
-      depthWrite: false,
-    });
+    const mat = (() => {
+      // Generate a circular star texture via canvas
+      const canvas = document.createElement("canvas");
+      canvas.width = 64;
+      canvas.height = 64;
+      const ctx = canvas.getContext("2d")!;
+      const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gradient.addColorStop(0, "rgba(255,255,255,1)");
+      gradient.addColorStop(0.2, "rgba(255,255,255,0.8)");
+      gradient.addColorStop(0.5, "rgba(255,255,255,0.15)");
+      gradient.addColorStop(1, "rgba(255,255,255,0)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 64, 64);
+      const texture = new THREE.CanvasTexture(canvas);
+
+      return new THREE.PointsMaterial({
+        color: new THREE.Color(color),
+        size: 1.2,
+        sizeAttenuation: true,
+        transparent: true,
+        opacity: 1.0,
+        blending: THREE.AdditiveBlending,
+        depthWrite: false,
+        map: texture,
+      });
+    })();
 
     const points = new THREE.Points(geom, mat);
     scene.add(points);

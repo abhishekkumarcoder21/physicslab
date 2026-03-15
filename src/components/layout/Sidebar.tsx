@@ -18,6 +18,7 @@ const navItems = [
   {
     label: "Kinematics",
     href: "/kinematics",
+    badge: "12%",
     icon: (
       <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
@@ -90,7 +91,7 @@ export default function Sidebar() {
             const isActive = pathname.startsWith(item.href);
             return (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className={cn(
@@ -101,7 +102,12 @@ export default function Sidebar() {
                 )}
               >
                 {item.icon}
-                {item.label}
+                <span className="flex-1">{item.label}</span>
+                {"badge" in item && item.badge && (
+                  <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-white/10 text-white/60">
+                    {item.badge}
+                  </span>
+                )}
               </Link>
             );
           })}
